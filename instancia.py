@@ -22,13 +22,19 @@ class Instancia:
         self.rotacao: float = 0.0
         self.modelo: int = 0
 
-    # def __instancia_ponto(self):
-    #     # modelview = (GLfloat * 16)()
-    #     # mvm = GL.glGetFloatv(GL.GL_MODELVIEW_MATRIX, modelview)
 
-    # def desenha(self):
-    #     glPushMatrix()
-    #     glTranslatef(self.posicao.x, self.posicao.y, 0)
-    #     glRotatef(self.rotacao, 0, 0, 1)
+    @staticmethod
+    def calcula_ponto(p): 
+        # Esse método calcula a posicao do ponto mesmo após sofrer translação, escala ou rotação
+        # É um método estático, para usar: Personagem().calcula_ponto(Ponto(1, 0, 0))
+        ponto_novo = []
+        matriz_gl = glGetFloatv(GL_MODELVIEW_MATRIX)
+        for i in range(4):
+            ponto_novo.append(
+                                matriz_gl[0][i] * p.x +
+                                matriz_gl[1][i] * p.y +
+                                matriz_gl[2][i] * p.z +
+                                matriz_gl[3][i]
+                            )
         
-    #     glPopMatrix()
+        return Ponto(ponto_novo[0], ponto_novo[1], ponto_novo[2])

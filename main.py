@@ -185,6 +185,16 @@ def display():
 
     glutSwapBuffers()
 
+def arrow_keys(*args):
+    if args[0] == 102: #arrow right
+        print("Right")
+    if args[0] == 100: #arrow left
+        print("Left")
+    if args[0] == 101: #arrow up
+        print("Up")
+    if args[0] == 103: #arrow down
+        print("Down")
+
 def keyboard(*args):
     if args[0] == b'1':
         utils.animando = True
@@ -206,7 +216,7 @@ if __name__ == "__main__":
     glutIdleFunc(animate)
     glutReshapeFunc(reshape)
     glutKeyboardFunc(keyboard)
-    # glutSpecialFunc(arrow_keys)
+    glutSpecialFunc(arrow_keys)
 
     try:
         glutMainLoop()
